@@ -1,0 +1,21 @@
+gprolog
+['harness.pl'].
+
+child(X, brad).
+Expect X = riley
+
+sibling(brad, X).
+X = jocelyn
+
+grandparent(X, riley, 0).
+X = karen
+X = steven
+
+grandchild(X, karen, 0).
+X = riley ;
+X = fictum
+
+cousin(riley, X, M, N).
+X = fictum
+M = 1
+N = 0
