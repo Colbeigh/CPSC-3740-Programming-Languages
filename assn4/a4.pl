@@ -1,11 +1,6 @@
 % ============================================================================
 % CPSC 3740 - Assignment 4
 %
-% This file contains relational Prolog predicates for lists, trees, and
-% polynomials. The comments are written in a teaching-oriented style to explain
-% the logical meaning of each predicate and how the recursive structure matches
-% the mathematical definition of the problem.
-%
 % Tree representation:
 % - A non-empty tree is a non-empty list.
 % - The first element is the root label.
@@ -16,12 +11,8 @@
 % - A polynomial is a list of coefficients of x^0, x^1, x^2, ...
 % - Example: [1,0,5,2,0,3] represents 3x^5 + 2x^3 + 5x^2 + 1
 % - The zero polynomial is represented as [0]
-% ============================================================================
-
-
-% ============================================================================
+%
 % Helper Predicates
-% ============================================================================
 
 % member2(X, L)
 % This predicate succeeds when X is an element of list L.
@@ -48,12 +39,10 @@ max_value(A, B, B) :-
     B > A.
 
 
-% ============================================================================
 % 1. list_count(X, Y, C)
-% ============================================================================
 
 % list_count(X, Y, C)
-% This predicate succeeds when X occurs exactly C times in list Y.
+% This predicate succeeds when X occurs exactly C timess in list Y.
 % It can be used to count the occurrences of a specific element, and it is
 % re-executable on backtracking when X is not fixed, allowing enumeration of
 % element/count relationships.
@@ -73,16 +62,12 @@ list_count(X, [H|T], C) :-
     list_count(X, T, C).
 
 
-% ============================================================================
 % 2. list_distinct(L)
-% ============================================================================
 
 % list_distinct(L)
 % This predicate succeeds when list L contains no duplicate elements.
-%
 % Base case:
 % - The empty list contains no duplicates.
-%
 % Recursive case:
 % - The head must not appear anywhere in the tail, and the tail itself must
 %   also be distinct.
@@ -92,9 +77,7 @@ list_distinct([H|T]) :-
     list_distinct(T).
 
 
-% ============================================================================
 % 3. list_union(X, Y, U)
-% ============================================================================
 
 % list_union(X, Y, U)
 % This predicate succeeds when U is the sorted union of the elements of X and Y.
@@ -104,15 +87,13 @@ list_distinct([H|T]) :-
 % Strategy:
 % - Append the two lists together.
 % - Sort the combined list.
-% - Prolog's sort/2 both orders the list and removes duplicates.
+% - Prologs sort/2 both orders the list and removes duplicates.
 list_union(X, Y, U) :-
     append(X, Y, XY),
     sort(XY, U).
 
 
-% ============================================================================
 % 4. list_intersect(X, Y, I)
-% ============================================================================
 
 % list_intersect(X, Y, I)
 % This predicate succeeds when I is the sorted intersection of the elements of
@@ -147,9 +128,7 @@ list_intersect_sorted([H|T], Y, I) :-
     list_intersect_sorted(T, Y, I).
 
 
-% ============================================================================
 % 5. tree_size(T, S)
-% ============================================================================
 
 % tree_size(T, S)
 % This predicate succeeds when S is the total number of nodes in tree T.
@@ -176,9 +155,7 @@ tree_size_list([T|Ts], S) :-
     S is S1 + S2.
 
 
-% ============================================================================
 % 6. tree_height(T, H)
-% ============================================================================
 
 % tree_height(T, H)
 % This predicate succeeds when H is the height of tree T.
@@ -211,9 +188,7 @@ subtree_max_height([T|Ts], H) :-
     max_value(H1, H2, H).
 
 
-% ============================================================================
 % 7. tree_sum(T, S)
-% ============================================================================
 
 % tree_sum(T, S)
 % This predicate succeeds when S is the sum of the labels along a root-to-leaf
@@ -235,9 +210,7 @@ tree_sum([Root|Subtrees], S) :-
     S is Root + S1.
 
 
-% ============================================================================
 % 8. poly_degree(P, D)
-% ============================================================================
 
 % poly_degree(P, D)
 % This predicate succeeds when D is the degree of polynomial P.
@@ -255,9 +228,7 @@ poly_degree(P, D) :-
     D is L - 1.
 
 
-% ============================================================================
 % 9. poly_coeff(P, K, C)
-% ============================================================================
 
 % poly_coeff(P, K, C)
 % This predicate succeeds when C is the coefficient of x^K in polynomial P.
@@ -308,9 +279,7 @@ poly_coeff_enumerate([_|T], Index, K, C) :-
     poly_coeff_enumerate(T, Index1, K, C).
 
 
-% ============================================================================
 % 10. poly_derivative(P, D)
-% ============================================================================
 
 % poly_derivative(P, D)
 % This predicate succeeds when D is the derivative of polynomial P.
